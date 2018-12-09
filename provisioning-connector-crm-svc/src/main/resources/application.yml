@@ -1,0 +1,28 @@
+server:
+  port: ${PROVISIONING_CONNECTOR_CRM_SVC_PORT:8080}
+spring:
+  application:
+    name: provisioning-connector-crm-svc
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        notifyCustomerConsumer:
+          destination: notifyCustomer
+          contentType: application/json
+          group: integration
+  kafka:
+    bootstrap-servers: ${PROVISIONING_CONNECTOR_CRM_SVC_KAFKA_BROKER_HOST:localhost:9092}
+keycloak:
+  auth-server-url: ${PROVISIONING_CONNECTOR_CRM_SVC_KEYCLOAK_URL:http://localhost:8180/auth}
+  realm: ${PROVISIONING_CONNECTOR_CRM_SVC_KEYCLOAK_REALM:provisioning}
+  resource: ${PROVISIONING_CONNECTOR_CRM_SVC_KEYCLOAK_RESOURCE:provisioning}
+  ssl-required: ${PROVISIONING_CONNECTOR_CRM_SVC_KEYCLOAK_SSL_REQUIRED:none}
+  public-client: ${PROVISIONING_CONNECTOR_CRM_SVC_KEYCLOAK_CLIENT:true}
+activiti:
+  cloud:
+    application.name: provisioning-connector-crm-svc
+logging:
+  level:
+    io.rasolog.provisioning: INFO
+

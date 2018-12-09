@@ -1,0 +1,32 @@
+server:
+  port: ${PROVISIONING_QUERY_PORT:8080}
+spring:
+  application:
+    name: provisioning-query
+  jpa:
+    generate-ddl: ${PROVISIONING_QUERY_GENERATEDDL:true}
+    hibernate.ddl-auto: ${PROVISIONING_QUERY_DDLAUTO:create}
+    database-platform: ${PROVISIONING_QUERY_DB_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
+  datasource:
+    driverClassName: ${PROVISIONING_QUERY_DB_DRIVER:org.postgresql.Driver}
+    url: ${PROVISIONING_QUERY_DB_URI:jdbc:postgresql://localhost:5432/querydb}
+    username: ${PROVISIONING_QUERY_DB_USER:postgres}
+    password: ${PROVISIONING_QUERY_DB_PASS:rootpwd}
+  jackson:
+    serialization.fail-on-unwrapped-type-identifiers: ${PROVISIONING_QUERY_JACKSON_FAIL_ON_UNWRAPPED_IDS:false}
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        producer:
+          destination: ${PROVISIONING_QUERY_PRODUCER_DEST:engineEvents}
+          contentType: ${PROVISIONING_QUERY_PRODUCER_CONTENT_TYPE:application/json}
+        queryConsumer:
+          destination: ${PROVISIONING_QUERY_CONSUMER_DEST:engineEvents}
+          group: ${PROVISIONING_QUERY_CONSUMER_GROUP:query}
+          contentType: ${PROVISIONING_QUERY_CONSUMER_CONTENT_TYPE:application/json}
+  kafka:
+    bootstrap-servers: ${PROVISIONING_QUERY_KAFKA_BROKER_HOST:localhost:9092}

@@ -1,0 +1,27 @@
+server:
+  port: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_PORT:8080}
+spring:
+  application:
+    name: provisioning-connector-simcard-svc
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        reserveSimCardConsumer:
+          destination: reserveSimCard
+          contentType: application/json
+          group: integration
+  kafka:
+    bootstrap-servers: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_KAFKA_BROKER_HOST:localhost:9092}
+keycloak:
+  auth-server-url: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_KEYCLOAK_URL:http://localhost:8180/auth}
+  realm: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_KEYCLOAK_REALM:provisioning}
+  resource: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_KEYCLOAK_RESOURCE:provisioning}
+  ssl-required: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_KEYCLOAK_SSL_REQUIRED:none}
+  public-client: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_KEYCLOAK_CLIENT:true}
+activiti:
+  cloud:
+    application.name: provisioning-connector-simcard-svc
+logging:
+  level:
+    io.rasolog.provisioning: INFO

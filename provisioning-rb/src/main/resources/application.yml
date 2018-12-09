@@ -1,0 +1,48 @@
+server:
+  port: ${PROVISIONING_RB_PORT:8080}
+spring:
+  application:
+      name: provisioning-rb
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        auditProducer:
+          destination: ${PROVISIONING_RB_AUDIT_PRODUCER_DEST:engineEvents}
+          contentType: ${PROVISIONING_RB_AUDIT_PRODUCER_CONTENT_TYPE:application/json}
+        commandResults:
+          destination: ${PROVISIONING_RB_COMMAND_RESULTS_DEST:commandResults}
+          group: ${PROVISIONING_RB_COMMAND_RESULTS_GROUP:commandResults}
+          contentType: ${PROVISIONING_RB_COMMAND_RESULTS_CONTENT_TYPE:application/json}
+        commandConsumer:
+          destination: ${PROVISIONING_RB_COMMAND_RESULTS_DEST:commandConsumer}
+          contentType: ${PROVISIONING_RB_COMMAND_RESULTS_CONTENT_TYPE:application/json}
+  kafka:
+    bootstrap-servers: ${PROVISIONING_RB_KAFKA_BROKER_HOST:localhost:9092}
+  datasource:
+    driverClassName: ${PROVISIONING_RB_DB_DRIVER:org.postgresql.Driver}
+    url: ${PROVISIONING_RB_DB_URI:jdbc:postgresql://localhost:5432/provisioningdb}
+    username: ${PROVISIONING_RB_DB_USER:postgres}
+    password: ${PROVISIONING_RB_DB_PASS:rootpwd}
+  jpa:
+    database-platform: ${PROVISIONING_RB_DB_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+    generate-ddl: ${PROVISIONING_RB_GENERATEDDL:true}
+    hibernate.ddl-auto: ${PROVISIONING_RB_DDLAUTO:create}
+  jackson:
+    serialization:
+      fail-on-unwrapped-type-identifiers: ${PROVISIONING_RB_JACKSON_FAIL_ON_UNWRAPPED_IDS:false}
+  main:
+    allow-bean-definition-overriding: true
+activiti:
+  cloud:
+    application.name: provisioning-rb
+keycloak:
+  auth-server-url: ${PROVISIONING_RB_KEYCLOAK_URL:http://localhost:8180/auth}
+  realm: ${PROVISIONING_RB_KEYCLOAK_REALM:provisioning}
+  resource: ${PROVISIONING_RB_KEYCLOAK_RESOURCE:provisioning}
+  ssl-required: ${PROVISIONING_RB_KEYCLOAK_SSL_REQUIRED:none}
+  public-client: ${PROVISIONING_RB_KEYCLOAK_CLIENT:true}
+
+logging:
+  level:
+    io.rasolog.provisioning: INFO

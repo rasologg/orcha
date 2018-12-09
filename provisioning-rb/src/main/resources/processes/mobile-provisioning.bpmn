@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0q6qkud" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="mobile-provisioning" name="mobile-provisioning" isExecutable="true">
+    <bpmn:startEvent id="start" name="StartEvent"/>
+    <bpmn:sequenceFlow id="flow1" sourceRef="start" targetRef="reserveSimCard"/>
+    <bpmn:serviceTask id="reserveSimCard" name="reserveSimCard" implementation="reserveSimCard"/>
+    <bpmn:sequenceFlow id="flow2" sourceRef="reserveSimCard" targetRef="provisionMobileNetwork"/>
+    <bpmn:serviceTask id="provisionMobileNetwork" name="provisionMobileNetwork" implementation="provisionMobileNetwork"/>
+    <bpmn:sequenceFlow id="flow3" sourceRef="provisionMobileNetwork" targetRef="notifyCustomer"/>
+    <bpmn:serviceTask id="notifyCustomer" name="notifyCustomer" implementation="notifyCustomer"/>
+    <bpmn:sequenceFlow id="flow4" sourceRef="notifyCustomer" targetRef="end"/>
+    <bpmn:endEvent id="end" name="end"/>
+  </bpmn:process>
+</bpmn:definitions>

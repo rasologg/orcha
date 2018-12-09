@@ -1,0 +1,36 @@
+server:
+  port: ${PROVISIONING_AUDIT_SERVER_PORT:8080}
+spring:
+  application:
+    name: provisioning-audit
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        auditConsumer:
+          destination: ${PROVISIONING_AUDIT_CONSUMER_DEST:engineEvents}
+          group: ${PROVISIONING_AUDIT_CONSUMER_GROUP:audit}
+          contentType: ${PROVISIONING_AUDIT_CONSUMER_CONTENT_TYPE:application/json}
+  kafka:
+    bootstrap-servers: ${PROVISIONING_KAFKA_BROKER_HOST:localhost:9092}
+  datasource:
+    driverClassName: ${PROVISIONING_AUDIT_DB_DRIVER:org.postgresql.Driver}
+    url: ${PROVISIONING_AUDIT_DB_URI:jdbc:postgresql://localhost:5432/auditdb}
+    username: ${PROVISIONING_AUDIT_DB_USER:postgres}
+    password: ${PROVISIONING_AUDIT_DB_PASS:rootpwd}
+  jpa:
+    database-platform: ${PROVISIONING_AUDIT_DB_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+    generate-ddl: ${PROVISIONING_AUDIT_GENERATEDDL:true}
+    hibernate.ddl-auto: ${PROVISIONING_AUDIT_DDLAUTO:create}
+  jackson.serialization.fail-on-unwrapped-type-identifiers: ${PROVISIONING_AUDIT_JACKSON_FAIL_ON_UNWRAPPED_IDS:false}
+
+keycloak:
+  auth-server-url: ${PROVISIONING_AUDIT_KEYCLOAK_URL:http://localhost:8180/auth}
+  realm: ${PROVISIONING_AUDIT_KEYCLOAK_REALM:provisioning}
+  resource: ${PROVISIONING_AUDIT_KEYCLOAK_RESOURCE:provisioning}
+  ssl-required: ${PROVISIONING_AUDIT_KEYCLOAK_SSL_REQUIRED:none}
+  public-client: ${PROVISIONING_AUDIT_KEYCLOAK_CLIENT:true}
+
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
+
+
