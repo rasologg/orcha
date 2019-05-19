@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "43413f53-18fe-407b-aee3-78ba0cd5ab8f",
+		"name": "provisioning",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "provisioning",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"customer_id\":\"c0001\",\n\t\"simcard_id\":\"sim0001\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/provision",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"provision"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
