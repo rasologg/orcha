@@ -1,5 +1,5 @@
 server:
-  port: ${PROVISIONING_QUERY_PORT:8080}
+  port: ${PROVISIONING_QUERY_PORT:8081}
 spring:
   application:
     name: provisioning-query

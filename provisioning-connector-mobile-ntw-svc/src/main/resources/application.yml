@@ -1,5 +1,5 @@
 server:
-  port: ${PROVISIONING_CONNECTOR_MOBILE_NTW_SVC_PORT:8080}
+  port: ${PROVISIONING_CONNECTOR_MOBILE_NTW_SVC_PORT:8085}
 spring:
   application:
     name: provisioning-connector-mobile-ntw-svc

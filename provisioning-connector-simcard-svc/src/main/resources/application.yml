@@ -1,5 +1,5 @@
 server:
-  port: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_PORT:8080}
+  port: ${PROVISIONING_CONNECTORS_SIMCARD_SVC_PORT:8084}
 spring:
   application:
     name: provisioning-connector-simcard-svc

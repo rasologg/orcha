@@ -6,7 +6,7 @@ To run the system you need Docker, Postgresql, Keycloak and Kafka broker.
 
 ## Start Apache Kafka
 
-I use the landoop distribution because, it's easy to use the docker image
+I use the landoop distribution because it's easy to run but you can use another distribution.
 
 ```console
 docker run --rm -p 2181:2181 -p 3030:3030 -p 8081-8083:8081-8083 -p 9581-9585:9581-9585 -p 9092:9092 -e ADV_HOST=localhost landoop/fast-data-dev:latest
@@ -26,7 +26,7 @@ docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -p 8180:8080 -d jbo
 ## Start Postgres
 
 ```console
-docker run --name postgres -e POSTGRES_PASSWORD=rootpwd -d postgres
+docker run --name postgres -e POSTGRES_PASSWORD=rootpwd -d -p 5432:5432 postgres
 ```
 
 - Create a database : provisioningdb, querydb and auditdb
