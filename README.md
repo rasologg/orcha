@@ -35,12 +35,9 @@ docker run --name postgres -e POSTGRES_PASSWORD=rootpwd -d -p 5432:5432 postgres
 
 You can start the application with your IDE or by maven command line.
 
-The actual version of Activiti Cloud has this bug https://github.com/Activiti/Activiti/issues/2247 with Apache Kafka.
-You must override the system variable ACT_INT_RES_CONSUMER to bypass the problem, for example ACT_INT_RES_CONSUMER=integrationResult_provisioning
-
 ## Start all the connectors
 
-Don't forget to change the server.port, and ACT_INT_RES_CONSUMER with the same value as provisioning-rb
+Don't forget to change the server.port
 
 ## Provision one mobile line
 
